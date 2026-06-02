@@ -17,6 +17,18 @@ resource "local_file" "example" {
   filename = "${path.module}/hello.txt" #this would be the terrformlessons folder?
 }
 
+#create random filename using random_pet
+resource "random_pet" "filename"{
+  length = 2
+  seperator = "_"
+}
+
+resource "random_integer" "integer"{
+  min = 1
+  max = 100000
+}
+
+
 #terraform workflow
 #terraform init - initialize working directory and downloads neccessary providers
 #terraform plan - shows what terraform will do based on the configuration file, does not make any changes
