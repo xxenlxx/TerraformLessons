@@ -14,13 +14,13 @@ resource "local_file" "example" {
   #example is the name to reference this resource
   #configuration arguments:
   content = "hey bitches!"
-  filename = "${path.module}/hello.txt" #this would be the terrformlessons folder?
+  filename = "${path.module}/files/hello.txt" #this would be the terrformlessons folder?
 }
 
 #create random filename using random_pet
 resource "random_pet" "filename"{
   length = 2
-  seperator = "_"
+  separator = "_"
 }
 
 resource "random_integer" "integer"{
@@ -28,7 +28,18 @@ resource "random_integer" "integer"{
   max = 100000
 }
 
+resource "local_file" "random_pet_file" {
+  filename = "${path.module}/files/${random_pet.filename.id}.txt"
+  content = "Terraform Generated This SHIT (${random_integer.integer.result})"
+}
 
+output "pet_name" {
+  value = random_pet.filename.id
+}
+
+output "integer" {
+  value = random_integer.integer.result
+}
 #terraform workflow
 #terraform init - initialize working directory and downloads neccessary providers
 #terraform plan - shows what terraform will do based on the configuration file, does not make any changes
