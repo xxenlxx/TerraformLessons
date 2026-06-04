@@ -1,6 +1,12 @@
 terraform {
   #required version of terraform needed
   required_version = ">=1.0"
+
+  required_providers {
+    random = {
+      version = "3.6.3"
+    }
+  }
 }
 
 #Placeholder for provider configuration
@@ -40,6 +46,7 @@ output "pet_name" {
 output "integer" {
   value = random_integer.integer.result
 }
+
 #terraform workflow
 #terraform init - initialize working directory and downloads neccessary providers
 #terraform plan - shows what terraform will do based on the configuration file, does not make any changes
